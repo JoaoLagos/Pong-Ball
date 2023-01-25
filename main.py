@@ -58,11 +58,13 @@ while gameIsON:
     if cursor.is_over_object(barraJogar):
         xAux = barraJogar.x
         yAux = barraJogar.y
-        barraJogar = Sprite("assets/menu/jogarON2.jpg")
+        barraJogar = Sprite("assets/menu/jogarON.jpg")
         barraJogar.x = screen.width/2 - barraJogar.width/2
         barraJogar.y = yAux
         if cursor.is_button_pressed(1):
-            game.start()
+            
+            game.start(screen)
+            
             
     else:
         create_barraJogarOFF()
@@ -82,7 +84,7 @@ while gameIsON:
         xAux = barraSair.x
         yAux = barraSair.y
         barraSair = Sprite("assets/menu/sairON.jpg")
-        barraSair.x = screen.width/2 - barraDificuldade.width/2
+        barraSair.x = screen.width/2 - barraSair.width/2
         barraSair.y = yAux
         if cursor.is_button_pressed(1):
             gameIsON = False
