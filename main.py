@@ -40,7 +40,6 @@ def create_barraDificuldadeOFF():
     barraDificuldade.y = barraJogar.y + 112 + 30
 create_barraDificuldadeOFF()
 
-
 # BARRA SAIR
 def create_barraSairOFF():
     global barraSair
