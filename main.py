@@ -20,7 +20,7 @@ screen.set_background_color([0,0,0])
 
 # LOGO
 logo = Sprite("assets/menu/logo.png")
-logo.x = screen.width/2 - logo.width/2
+logo.x = screen.width/2 - logo.width/2 
 logo.y = 70
 
 inicio_barras_y = 450
@@ -61,10 +61,7 @@ while gameIsON:
         barraJogar.x = screen.width/2 - barraJogar.width/2
         barraJogar.y = yAux
         if cursor.is_button_pressed(1):
-            
-            game.start(screen)
-            
-            
+            game.start(screen)     
     else:
         create_barraJogarOFF()
 
@@ -77,8 +74,8 @@ while gameIsON:
         barraDificuldade.y = yAux
     else:
         create_barraDificuldadeOFF()
-
     #BARRA DIFICULDADE
+
     if cursor.is_over_object(barraSair):
         xAux = barraSair.x
         yAux = barraSair.y
@@ -89,17 +86,14 @@ while gameIsON:
             gameIsON = False
     else:
         create_barraSairOFF()
-        
     
+    if pygame.key.get_pressed()[pygame.K_F11]:
+        pygame.display.toggle_fullscreen()
 
     screen.set_background_color([0,0,0])
     logo.draw()
-
     barraJogar.draw()
-
     barraDificuldade.draw()
-
     barraSair.draw()
-
     
     screen.update()
