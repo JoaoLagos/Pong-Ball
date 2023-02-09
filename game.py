@@ -17,9 +17,9 @@ def start(screen):
     barraDir.y = screen.height/2 - barraDir.height/2
 
     #BALL
-    ball = Sprite("assets/game/ball.png")
-    ball.x = screen.width/2 - ball.width/2
-    ball.y = screen.height/2 - ball.height/2
+    ball1 = Sprite("assets/game/ball.png")
+    ball1.x = screen.width/2 - ball1.width/2
+    ball1.y = screen.height/2 - ball1.height/2
 
     # LINHA
     linhaDivisoria = Sprite("assets/game/linhaDivisoria.png")
@@ -56,7 +56,7 @@ def start(screen):
 
         ''' Movimentação da Barra Direita'''
         if not multiplayer: ## Movimentação da Barra PC (IA)
-            move_barra_by_IA(screen, ball, barraDir, velBarraDir) # Move barra através de inteligência artificial
+            move_barra_by_IA(screen, ball1, barraDir, velBarraDir) # Move barra através de inteligência artificial
         else: ## Movimentação da Barra Direita: Player 2
             move_barra(screen, teclado, barraDir, velBarraDir, "UP", "DOWN")
         ######### FIM BARRA #########
@@ -64,21 +64,35 @@ def start(screen):
 
         ######### BOLA #########
         ''' Seta a velocidade X e Y da bola, variando conforme atinge a borda ou a barra, para que não saia da tela '''
-        velBall_X, velBall_Y = velBall_by_borders(screen, ball, velBall_X, velBall_Y, barraEsq, barraDir)
+        velBall_X, velBall_Y = velBall_by_borders(screen, ball1, velBall_X, velBall_Y, barraEsq, barraDir)
 
         ''' Pontuação GOAL '''
-        if ball.x <= 0:
+        if ball1.x <= 0:
             point_P2 += 1
-            ball, velBall_X, velBall_Y = create_ball_after_goal(screen, velBall_X, velBall_Y)
-        elif ball.x + ball.width >= screen.width:
+            ball1, velBall_X, velBall_Y = create_ball_after_goal(screen, velBall_X, velBall_Y)
+        elif ball1.x + ball1.width >= screen.width:
             point_P1 += 1
-            ball, velBall_X, velBall_Y = create_ball_after_goal(screen, velBall_X, velBall_Y)
+            ball1, velBall_X, velBall_Y = create_ball_after_goal(screen, velBall_X, velBall_Y)
+
+        ''' Bola Secundária '''
+        #
+        #FAZER
+        #
 
         ''' MOVIMENTAÇÃO BOLA '''
-        ball.x += velBall_X*screen.delta_time()
-        ball.y += velBall_Y*screen.delta_time()
+        ball1.x += velBall_X*screen.delta_time()
+        ball1.y += velBall_Y*screen.delta_time()
         ######### FIM BOLA #########
 
+        screen.draw_text(f"Player 1: {point_P1}", x=30, y=30, size=25, color=(255,255,255), bold=True)
+        screen.draw_text(f"Player 2: {point_P2}", x= linhaDivisoria.x+linhaDivisoria.width + 30, y=30, size=25, color=(255,255,255), bold=True)    
+
+        logo.draw()
+        ball1.draw()
+        linhaDivisoria.draw()
+        barraEsq.draw()
+        barraDir.draw()
+        
         ######### ATALHOS #########
         ''' TELA CHEIA '''
         if pygame.key.get_pressed()[pygame.K_F11]:
@@ -88,21 +102,13 @@ def start(screen):
         if teclado.key_pressed("esc"):
             gameisON = False
         ######### FIM ATALHOS #########
-
-        screen.draw_text(f"Player 1: {point_P1}", x=30, y=30, size=25, color=(255,255,255), bold=True)
-        screen.draw_text(f"Player 2: {point_P2}", x= linhaDivisoria.x+linhaDivisoria.width + 30, y=30, size=25, color=(255,255,255), bold=True)    
-
-        logo.draw()
-        ball.draw()
-        linhaDivisoria.draw()
-        barraEsq.draw()
-        barraDir.draw()
         
         
         screen.update()
 
-
+''' Reposiciona a bola depois do gol '''
 def create_ball_after_goal(screen, velBall_X=0, velBall_Y=0):
+    ''' Recriação da Bola '''
     ball = Sprite("assets/game/ball.png")
     ball.x = screen.width/2 - ball.width/2
     ball.y = screen.height/2 - ball.height/2
@@ -114,9 +120,9 @@ def create_ball_after_goal(screen, velBall_X=0, velBall_Y=0):
 ''' Move a barra controlada pelo player '''
 def move_barra(screen, teclado, barra, velBarra, bottomUP, bottomDOWN):
     #MOVIMENTAÇÃO BARRA ESQUERDA
-    if teclado.key_pressed(bottomUP):
+    if teclado.key_pressed(bottomUP) and not barra.y<=0:
         barra.y -= velBarra*screen.delta_time()
-    elif teclado.key_pressed(bottomDOWN):
+    elif teclado.key_pressed(bottomDOWN) and not barra.y >= screen.height-barra.height:
         barra.y += velBarra*screen.delta_time()
 
 ''' Define a velocidade X e Y da bola, quando atinge as bordas ou as barras, para que não saia da tela '''

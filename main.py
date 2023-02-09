@@ -4,6 +4,7 @@ from PPlay.sprite import *
 from PPlay.gameobject import *
 from PPlay.mouse import *
 import game
+import dificuldade
 
 ################### FUNÇÕES #############
 
@@ -61,7 +62,7 @@ while gameIsON:
         barraJogar.x = screen.width/2 - barraJogar.width/2
         barraJogar.y = yAux
         if cursor.is_button_pressed(1):
-            game.start(screen)     
+            game.start(screen)
     else:
         create_barraJogarOFF()
 
@@ -72,6 +73,8 @@ while gameIsON:
         barraDificuldade = Sprite("assets/menu/dificuldadeON.jpg")
         barraDificuldade.x = screen.width/2 - barraDificuldade.width/2
         barraDificuldade.y = yAux
+        if cursor.is_button_pressed(1):
+            dificuldade.start(screen)  
     else:
         create_barraDificuldadeOFF()
     #BARRA DIFICULDADE
