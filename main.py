@@ -6,12 +6,6 @@ from PPlay.mouse import *
 import game
 import dificuldade
 
-################### FUNÇÕES #############
-
-
-
-##########################################
-
 # SCREEN
 screen_width = 1920*0.85 # Largura
 screen_height = 1080*0.85 # Altura
@@ -27,29 +21,31 @@ logo.y = 70
 inicio_barras_y = 450
 # BARRA JOGAR
 def create_barraJogarOFF():
-    global barraJogar
     barraJogar = Sprite("assets/menu/jogar.jpg")
     barraJogar.x = screen.width/2 - barraJogar.width/2
     barraJogar.y = 450
-create_barraJogarOFF()
+    return barraJogar
+barraJogar = create_barraJogarOFF()
 
 # BARRA DIFICULDADE
 def create_barraDificuldadeOFF():
-    global barraDificuldade
     barraDificuldade = Sprite("assets/menu/dificuldade.jpg")
     barraDificuldade.x = screen.width/2 - barraDificuldade.width/2
     barraDificuldade.y = barraJogar.y + 112 + 30
-create_barraDificuldadeOFF()
+    return barraDificuldade
+barraDificuldade = create_barraDificuldadeOFF()
 
 # BARRA SAIR
 def create_barraSairOFF():
-    global barraSair
     barraSair = Sprite("assets/menu/sair.jpg")
     barraSair.x = screen.width/2 - barraSair.width/2
     barraSair.y = barraDificuldade.y + 112 + 30
-create_barraSairOFF()
+    return barraSair
+barraSair = create_barraSairOFF()
 
 cursor = Mouse()
+
+level = 1
 
 gameIsON = True # Verificador se o jogo está aberto
 while gameIsON:
@@ -64,7 +60,7 @@ while gameIsON:
         if cursor.is_button_pressed(1):
             game.start(screen)
     else:
-        create_barraJogarOFF()
+        barraJogar = create_barraJogarOFF()
 
     #BARRA DIFICULDADE
     if cursor.is_over_object(barraDificuldade):
@@ -74,9 +70,9 @@ while gameIsON:
         barraDificuldade.x = screen.width/2 - barraDificuldade.width/2
         barraDificuldade.y = yAux
         if cursor.is_button_pressed(1):
-            dificuldade.start(screen)  
+            dificuldade.start(screen, level)  
     else:
-        create_barraDificuldadeOFF()
+        barraDificuldade = create_barraDificuldadeOFF()
     #BARRA DIFICULDADE
 
     if cursor.is_over_object(barraSair):
@@ -88,7 +84,7 @@ while gameIsON:
         if cursor.is_button_pressed(1):
             gameIsON = False
     else:
-        create_barraSairOFF()
+        barraSair = create_barraSairOFF()
     
     if pygame.key.get_pressed()[pygame.K_F11]:
         pygame.display.toggle_fullscreen()
