@@ -127,21 +127,21 @@ def move_barra(screen, teclado, barra, velBarra, bottomUP, bottomDOWN):
 
 ''' Define a velocidade X e Y da bola, quando atinge as bordas ou as barras, para que não saia da tela '''
 def velBall_by_borders(screen, ball, velBall_X, velBall_Y, barraEsq, barraDir):#def velBall_by_borders
-    '''ballFuturo = Sprite("assets/game/ball.png")
+    ballFuturo = Sprite("assets/game/ball.png")
     ballFuturo.x = ball.x + velBall_X*screen.delta_time()
-    ballFuturo.y = ball.y + velBall_Y*screen.delta_time()''' # Caso a bola bugue
+    ballFuturo.y = ball.y + velBall_Y*screen.delta_time() # Caso a bola bugue
 
     ## HORIZONTAL
     ' Ao encostar nas laterais '
-    if ball.collided(barraEsq):
+    if ballFuturo.collided(barraEsq):
         velBall_X = abs(velBall_X)
-    elif ball.collided(barraDir):
+    elif ballFuturo.collided(barraDir):
         velBall_X = -velBall_X
     ## VERTICAL
     ' Ao enconstar em cima ou em baixo '
-    if ball.y <= 0:
+    if ballFuturo.y <= 0:
         velBall_Y = abs(velBall_Y)
-    elif ball.y >= screen.height-ball.height:
+    elif ballFuturo.y >= screen.height-ball.height:
         velBall_Y = -velBall_Y
 
     return velBall_X, velBall_Y

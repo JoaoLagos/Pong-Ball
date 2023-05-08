@@ -30,12 +30,12 @@ def start(screen, level):
 
     #BARRA DIFÍCIL
     ### Fazer !!! ###
-    '''def create_barraDificilOFF():
-        barraDificil = Sprite("assets/dificuldade/medio.png")
+    def create_barraDificilOFF():
+        barraDificil = Sprite("assets/dificuldade/dificil.png")
         barraDificil.x = screen.width/2 - barraDificil.width/2
         barraDificil.y = barraMedio.y+barraMedio.height + 30
         return barraDificil
-    barraDificil = create_barraDificilOFF()'''
+    barraDificil = create_barraDificilOFF()
 
     teclado = Keyboard()
     cursor = Mouse()
@@ -69,21 +69,22 @@ def start(screen, level):
 
         # BARRA DIFÍCIL
         ### Fazer !!! ###
-        '''if cursor.is_over_object(barraDificil):
+        if cursor.is_over_object(barraDificil):
             xAux = barraDificil.x
             yAux = barraDificil.y
-            barraDificil = Sprite("assets/dificuldade/medio.png") # Colocar o medioON.png (Ainda não foi criado, pois o site Pixelr limitou o número de download) 
+            barraDificil = Sprite("assets/dificuldade/dificilON2.png") # Colocar o medioON.png (Ainda não foi criado, pois o site Pixelr limitou o número de download) 
             barraDificil.x = screen.width/2 - barraDificil.width/2
-            barrDificilo.y = yAux
+            barraDificil.y = yAux
             if cursor.is_button_pressed(1):
                 level = 2
         else:
-            create_barraDificilOFF()'''
+            barraDificil = create_barraDificilOFF()
 
 
         logoDificuldade.draw()
         barraFacil.draw()
         barraMedio.draw()
+        barraDificil.draw()
         if teclado.key_pressed("ESC"):
             break
 
